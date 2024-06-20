@@ -1,9 +1,12 @@
+import datetime
 import time
+import requests
+import json
 from selenium import webdriver
 from selenium.webdriver.support import  expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-
+from common.basemethod import presence_of_element_located
 class Buying():
 
     def __init__(self,login_url: str="https://www.taobao.com"):
@@ -32,10 +35,27 @@ class Buying():
             except Exception as e:
                 print(str(e))
                 continue
+
+# 获取淘宝时间
+    def taobao_time(self):
+        url = 'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp'
+        ret = requests.get(url).text
+        js = json.loads(ret)
+        return int(js['data']['t'])
+
+    timestamp_ms = taobao_time()
+
+    timestamp = timestamp_ms / 1000
+
+    dt_object = datetime.datetime.fromtimestamp(timestamp)
+
+    print(dt_object)
+    formatted_time = dt_object.strftime('%Y-%m-%d %H:%M:%S.%f')  # %f 用于微秒
+    print(formatted_time)
 # while True:
 #     current_time = datetime.now()
-#     if (self.seckill_time_obj - current_time).seconds > 180:
-#         self.driver.get("https://cart.taobao.com/cart.htm")
+#     if (taobao_time() - current_time).seconds > 180:
+#         driver.get("https://cart.taobao.com/cart.htm")
 #         print("每分钟刷新一次界面，防止登录超时...")
 #         sleep(60)
 #     else:
@@ -46,13 +66,20 @@ class Buying():
 #         if self.driver.find_element_by_id("J_SelectAll1"):
 #             self.driver.find_element_by_id("J_SelectAll1").click()
 #             print("已经选中全部商品！！！")
-# # 获取淘宝时间
-# def taobao_time(self):
-#     url = 'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp'
-#     ret = requests.get(url).text
-#     js = json.loads(ret)
-#     return int(js['data']['t'])
+# 假设你有一个以毫秒为单位的时间戳
+# timestamp_ms = 1718890043663
 #
+# # 将毫秒转换为秒
+# timestamp = timestamp_ms / 1000
+#
+# # 现在你可以像之前一样将时间戳转换为 datetime 对象
+# dt_object = datetime.fromtimestamp(timestamp)
+#
+# # 打印或格式化 datetime 对象
+# print(dt_object)
+# formatted_time = dt_object.strftime('%Y-%m-%d %H:%M:%S.%f')  # %f 用于微秒
+# print(formatted_time)
+# #
 #
 # def local_jd_time_diff(self):
 #     return self.local_time() - self.taobao_time()
@@ -97,6 +124,6 @@ class Buying():
 #         sleep(60)
 #         self.driver.quit()
 
-if __name__ == '__main__':
-    buy = Buying()
-    buy.buymt()
+# if __name__ == '__main__':
+#     buy = Buying()
+#     buy.buymt()
