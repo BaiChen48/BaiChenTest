@@ -5,7 +5,10 @@ description = "Default template for PDM package"
 authors = [
     {name = "", email = ""},
 ]
-dependencies = []
+dependencies = [
+    "flake8>=7.0.0",
+    "selenium>=4.21.0",
+]
 requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT"}
