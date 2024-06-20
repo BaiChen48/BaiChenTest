@@ -6,9 +6,8 @@ authors = [
     {name = "", email = ""},
 ]
 dependencies = [
-    "pandas>=2.2.2",
-    "sqlalchemy>=2.0.30",
-    "pyodbc>=5.1.0",
+    "flake8>=7.0.0",
+    "selenium>=4.21.0",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
