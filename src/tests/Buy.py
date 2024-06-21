@@ -1,4 +1,3 @@
-
 import datetime
 from selenium import webdriver
 import requests, json
@@ -22,11 +21,12 @@ class Buy():
 
 if __name__ == '__main__':
     time = Buy().taobao_time()
-    year, month, day, hour, minute, second, milliseconds = 2024, 6, 20, 15, 30, 0, 0
-    dt = datetime.datetime(year, month, day, hour, minute, second, milliseconds * 1000)
-    # 获取当前时间的 datetime 对象
+    year, month, day, hour, minute, second, = 2024, 6, 20, 15, 30, 0,
+    buy_dt = datetime.datetime(year, month, day, hour, minute, second, microsecond=1)
+
+    print('buy_dt:', buy_dt)
     now = datetime.datetime.now()
-    print(now)
+
     # 将 datetime 对象转换为时间戳（秒）
     timestamp_seconds = now.timestamp()
 
@@ -35,6 +35,12 @@ if __name__ == '__main__':
 
     print("当前时间的 13 位毫秒时间戳：", timestamp_milliseconds)
 
-    tt = dt.timestamp()
-    # print(tt)
-    print("淘宝 时间 13 位毫秒时间戳：",time)
+    print("淘宝 时间 13 位毫秒时间戳：", time)
+
+    dt_object = datetime.datetime.fromtimestamp(time / 1000)
+    formatted_time = dt_object.strftime('%Y-%m-%d %H:%M:%S')
+    # 格式化 datetime 对象为字符串，并包含毫秒
+    formatted_time_with_milliseconds = dt_object.strftime('%Y-%m-%d %H:%M:%S.%f')#[:-3]
+
+    print("格式化的日期和时间（包含毫秒）：", formatted_time_with_milliseconds)
+    print("淘宝格式化的日期和时间：", formatted_time)
