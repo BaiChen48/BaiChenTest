@@ -44,7 +44,7 @@ class Buy():
             taobao_time = BuyTime().taobao_time_format()
             count_down = (seckill_time - taobao_time).seconds
             print('倒计时:', count_down/60)
-            if count_down > 180000:
+            if count_down > 100:
                 self.driver.get("https://cart.taobao.com/cart.htm")
                 print("每分钟刷新一次界面，防止登录超时...")
                 time.sleep(60)
@@ -95,6 +95,8 @@ class Buy():
                     print("重试抢购次数达到上限，放弃重试...")
                     break
             time.sleep(0.1)
+
+
 
 
 if __name__ == '__main__':
