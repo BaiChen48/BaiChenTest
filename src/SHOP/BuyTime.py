@@ -5,11 +5,6 @@ import requests, json
 
 class BuyTime():
 
-    # def __init__(self, login_url: str = "https://www.taobao.com"):
-    #     self.driver = webdriver.Chrome()
-    #     self.driver.get(login_url)
-    #     self.driver.maximize_window()
-
     # 淘宝时间戳
     def taobao_time_stamp(self):
         url = 'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp'
