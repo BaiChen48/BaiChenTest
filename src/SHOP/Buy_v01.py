@@ -13,7 +13,7 @@ class Buy():
             self.driver.get(login_url)
             self.driver.maximize_window()
         except:
-            pass
+            print('打开淘宝网站失败!')
 
     def login(self):
 
@@ -21,8 +21,8 @@ class Buy():
             print('开始登录')
             login_element_locat = (By.LINK_TEXT, '亲，请登录')
             presence_of_element_located(self.driver, login_element_locat).click()
-
             time.sleep(10)
+
             print('点击购物车')
             shopping_car_locat = (By.CSS_SELECTOR, '[href="//cart.taobao.com"]')
             presence_of_element_located(self.driver, shopping_car_locat).click()
@@ -35,18 +35,16 @@ class Buy():
             presence_of_element_located(self.driver, select_all_locat).click()
             print('点击结算按钮')
             settlement_element_locat = (By.ID, 'J_Go')
+            time.sleep(0.5)
             presence_of_element_located(self.driver, settlement_element_locat).click()
-
+            print('点击提交订单按钮')
             # 提交订单按钮
-            submit_order_button = (By.CSS_SELECTOR, 'title="提交订单"')
+            submit_order_button = (By.CSS_SELECTOR, '[title="提交订单"]')
             presence_of_element_located(self.driver, submit_order_button).click()
         except:
             print('失败')
 
-        # finally:
-        #     print('通过链接进入购物车')
-        #     car_url = 'https://cart.taobao.com/cart.htm'
-        #     self.driver.get(car_url)
+
 
 
 if __name__ == '__main__':
